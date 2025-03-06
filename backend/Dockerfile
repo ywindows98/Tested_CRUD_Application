@@ -1,23 +1,24 @@
-# Základný obraz z Docker Hub
-# Fungujúca inštalácia Alpine Linux s nainštalovaným interpreterom Python
-# Výhodou je malá veľkosť
 FROM python:3.12-alpine
 
-# Nastavenie pracovného adresára kontajnera
-WORKDIR /app
+# Set the working directory inside the container
+WORKDIR /backend
 
-# Inštalácia  závislostí aplikácie
-RUN pip install flask
+COPY requirements.txt .
 
-# Kopírovanie aplikácie súborov do obrazu
-COPY ./app.py /app
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Nastavenie premennej prostredia
+# Copy the application code
+COPY ./app.py /backend
+COPY ./tests /backend/tests/
+#COPY ./tests/test_routes.py /app/tests/
+
+# Set env variable
 ENV FLASK_APP app.py
 
 EXPOSE 5000
 
-# Program na spustenie
+# Program to start
 ENTRYPOINT [ "flask" ]
-# Argumenty
+# Arguments
 CMD ["run", "--host", "0.0.0.0"]
