@@ -4,7 +4,7 @@ from flask import Flask, jsonify
 from src.models import db, User, Subscription, StatusEnum
 from src import populate
 
-load_dotenv("../backend_env.env")
+# load_dotenv("../backend_env.env")
 
 # Initialize flaskapp
 app = Flask(__name__)
@@ -27,23 +27,27 @@ populate.populate_subscriptions(app)
 
 @app.route("/")
 def home():
-    name = "Ferko"
+    return jsonify({"message": "Home page"})
 
-    return jsonify({"message": "Backend is running!"})
-
-@app.route("/users", methods=["GET","POST"])
+@app.route("/user", methods=["GET"])
 def get_users():
+    return jsonify({"message" : "Not implemented"}), 405
 
-    subscription = Subscription.query.filter_by(name="premium").first()
-    if not subscription:
-        raise ValueError("Invalid subscription type")
+@app.route("/user", methods=["POST"])
+def create_user():
+    return jsonify({"message" : "Not implemented"}), 405
 
-    new_user = User(username="sample", email="sample@gmail.com", subscription_id=subscription.id, status=StatusEnum.ONLINE)
+@app.route("/user/<int:id>", methods=["GET"])
+def get_user():
+    return jsonify({"message" : "Not implemented"}), 405
 
-    db.session.add(new_user)
-    db.session.commit()
+@app.route("/user/<int:id>", methods=["PUT"])
+def get_user():
+    return jsonify({"message" : "Not implemented"}), 405
 
-    return "<p>{}</p>"
+@app.route("/user/<int:id>", methods=["DELETE"])
+def get_user():
+    return jsonify({"message" : "Not implemented"}), 405
 
 if __name__ == "__main__":
     app.run()
