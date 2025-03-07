@@ -42,11 +42,11 @@ def get_user():
     return jsonify({"message" : "Not implemented"}), 405
 
 @app.route("/user/<int:id>", methods=["PUT"])
-def get_user():
+def update_user():
     return jsonify({"message" : "Not implemented"}), 405
 
 @app.route("/user/<int:id>", methods=["DELETE"])
-def get_user():
+def delete_user():
     return jsonify({"message" : "Not implemented"}), 405
 
 if __name__ == "__main__":
