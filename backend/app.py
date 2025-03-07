@@ -1,10 +1,8 @@
 from dotenv import load_dotenv
 import os
 from flask import Flask, jsonify
-from models import db, User, Subscription, StatusEnum
-import populate
-from datetime import date
-import time
+from src.models import db, User, Subscription, StatusEnum
+from src import populate
 
 load_dotenv("../backend_env.env")
 
@@ -28,13 +26,13 @@ with app.app_context():
 populate.populate_subscriptions(app)
 
 @app.route("/")
-def hello():
+def home():
     name = "Ferko"
 
-    return "<h1 style='color:blue'>Hello There {}!</h1>".format(name)
+    return jsonify({"message": "Backend is running!"})
 
 @app.route("/users", methods=["GET","POST"])
-def get_date():
+def get_users():
 
     subscription = Subscription.query.filter_by(name="premium").first()
     if not subscription:

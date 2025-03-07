@@ -10,8 +10,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the application code
 COPY ./app.py /backend
-COPY ./models.py /backend
-COPY ./populate.py /backend
+COPY ./.coveragerc /backend
+COPY ./src /backend/src/
 COPY ./tests /backend/tests/
 #COPY ./tests/test_routes.py /app/tests/
 

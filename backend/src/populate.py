@@ -1,4 +1,4 @@
-from models import db, User, Subscription
+from .models import db, Subscription
 
 def populate_subscriptions(app):
     # Insert default subscription types if they don't exist
