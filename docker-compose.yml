@@ -8,7 +8,9 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "5432:5432" # first port is the outside port
+    networks:
+      - common_network
 
   backend:
     build: ./backend
@@ -19,14 +21,16 @@ services:
       - "5000:5000"
     depends_on:
       - db
+    restart:
+      "on-failure:3"
     volumes:
       - ./backend:/app
     networks:
-      - backend_network
+      - common_network
 
 volumes:
   postgres_data:
 
 networks:
-  backend_network:
+  common_network:
     driver: bridge
