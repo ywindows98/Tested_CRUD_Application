@@ -1,7 +1,8 @@
 from dotenv import load_dotenv
 import os
 from flask import Flask, jsonify
-from flask_sqlalchemy import SQLAlchemy
+from models import db, User, Subscription, StatusEnum
+import populate
 from datetime import date
 import time
 
@@ -17,25 +18,14 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# Initialize db
-db = SQLAlchemy(app)
-
-# A user model
-class AppUser(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-
-    def __repr__(self):
-        return f'<User {self.username}>'
-
-    def to_dict(self):
-        return {"id": self.id, "name": self.name, "email": self.email}
-
+# Initialize db with app, because they are in separate files
+db.init_app(app)
 
 # Create tables
 with app.app_context():
     db.create_all()
+
+populate.populate_subscriptions(app)
 
 @app.route("/")
 def hello():
@@ -45,7 +35,12 @@ def hello():
 
 @app.route("/users", methods=["GET","POST"])
 def get_date():
-    new_user = AppUser(username="sample", email="sample@gmail.com")
+
+    subscription = Subscription.query.filter_by(name="premium").first()
+    if not subscription:
+        raise ValueError("Invalid subscription type")
+
+    new_user = User(username="sample", email="sample@gmail.com", subscription_id=subscription.id, status=StatusEnum.ONLINE)
 
     db.session.add(new_user)
     db.session.commit()
