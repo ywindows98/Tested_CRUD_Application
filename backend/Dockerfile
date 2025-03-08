@@ -13,14 +13,17 @@ COPY ./app.py /backend
 COPY ./.coveragerc /backend
 COPY ./src /backend/src/
 COPY ./tests /backend/tests/
-#COPY ./tests/test_routes.py /app/tests/
 
 # Set env variable
 ENV FLASK_APP app.py
 
 EXPOSE 5000
 
-# Program to start
-ENTRYPOINT [ "flask" ]
-# Arguments
-CMD ["run", "--host", "0.0.0.0"]
+## Program to start
+#ENTRYPOINT [ "flask" ]
+## Arguments
+#CMD ["run", "--host", "0.0.0.0"]
+
+ENTRYPOINT ["sh", "-c", "pytest -v --cov && flask run --host=0.0.0.0"]
+# To make app run even if tests are failed
+#ENTRYPOINT ["sh", "-c", "pytest -v --cov || true && flask run --host=0.0.0.0"]

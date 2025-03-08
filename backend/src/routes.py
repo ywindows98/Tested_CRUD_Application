@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from .models import User
 from .database import db
+from datetime import datetime
 
 main_bp = Blueprint('main', __name__)  # Create a blueprint
 
@@ -25,6 +26,8 @@ def create_user():
     date_registered = data.get('date_registered')
     location = data.get('location')
     status = data.get('status')
+
+    date_registered = datetime.strptime(date_registered, "%a, %d %b %Y %H:%M:%S GMT").date()
 
     # Create user and add to db
     new_user = User(username=username, email=email, subscription_id=subscription_id, date_registered=date_registered, location=location, status=status)
