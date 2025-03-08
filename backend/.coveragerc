@@ -3,3 +3,5 @@ omit =
     tests/*
     src/__init__.py
     src/models.py
+    src/database.py
+    app.py

@@ -46,14 +46,9 @@ class TestRoutes(unittest.TestCase):
             'username': 'SampleUser1',
             'email': 'sampleemail@sample.com',
             'subscription_id': 2,
-            'status': StatusEnum.ONLINE.value
+            'status': StatusEnum.ONLINE.name
         }
         response = self.client.post('/user', json=data)
-        # Verify DB
-        with self.app.app_context():
-            user = User.query.filter_by(username='SampleUser1').first()
-            self.assertIsNotNone(user)  # Ensure the user exists
-            self.assertEqual(user.email, 'sampleemail@sample.com')  # Ensure email matches
 
         # HTTP response
         self.assertEqual(response.status_code, 201)
@@ -62,6 +57,11 @@ class TestRoutes(unittest.TestCase):
         self.assertEqual(response.json['username'], 'SampleUser1')
         self.assertEqual(response.json['subscription_id'], 2)
 
+        # Verify DB
+        with self.app.app_context():
+            user = User.query.filter_by(username='SampleUser1').first()
+            self.assertIsNotNone(user)  # Ensure the user exists
+            self.assertEqual(user.email, 'sampleemail@sample.com')  # Ensure email matches
 
 
 if __name__ == '__main__':
