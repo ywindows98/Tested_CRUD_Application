@@ -10,11 +10,10 @@ from backend.src import create_app
 from backend.src.models import User, Subscription, StatusEnum
 
 
-class TestRoutes(unittest.TestCase):
+class BaseUserTestCase(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Set up test client and test database"""
-        # cls.app = app
         cls.app = create_app(testing=True)
         cls.client = cls.app.test_client()
 
@@ -26,15 +25,33 @@ class TestRoutes(unittest.TestCase):
             'username': 'SampleFullData',
             'email': 'sampleemail@sample.com',
             'subscription_id': 2,
-            'date_registered': datetime.date(2025, 3, 1),
+            'date_registered': datetime.datetime(2025, 3, 1),
             'location': 'Kosice',
             'status': StatusEnum.ONLINE.name
         }
 
-        cls.sample_no_date_location_status = {
-            'username': 'UserNoDateLocationStatus',
+        cls.sample_no_date = {
+            'username': 'UserNoDate',
             'email': 'sampleemail@sample.com',
-            'subscription_id': 1
+            'subscription_id': 1,
+            'location': 'Kosice',
+            'status': StatusEnum.ONLINE.name
+        }
+
+        cls.sample_no_location = {
+            'username': 'UserNoLocation',
+            'email': 'sampleemail@sample.com',
+            'subscription_id': 1,
+            'date_registered': datetime.date(2025, 3, 1),
+            'status': StatusEnum.ONLINE.name
+        }
+
+        cls.sample_no_status = {
+            'username': 'UserNoStatus',
+            'email': 'sampleemail@sample.com',
+            'subscription_id': 1,
+            'date_registered': datetime.date(2025, 3, 1),
+            'location': 'Kosice'
         }
 
         cls.sample_no_username = {
@@ -43,12 +60,12 @@ class TestRoutes(unittest.TestCase):
         }
 
         cls.sample_no_email = {
-            'username': 'UserNoDateLocation',
+            'username': 'UserNoEmail',
             'subscription_id': 2
         }
 
         cls.sample_no_subscription = {
-            'username': 'UserNoDateLocation',
+            'username': 'UserNoSubscription',
             'email': 'sampleemail@sample.com',
         }
 
@@ -71,30 +88,3 @@ class TestRoutes(unittest.TestCase):
         """Roll back the changes"""
         db.session.rollback()
         self.app_context.pop()
-
-    def test_create_user(self):
-        """Test POST /user"""
-
-        response = self.client.post('/user', json=self.sample_full_data)
-
-        # HTTP response
-        self.assertEqual(response.status_code, 201)
-        self.assertIn('username', response.json)
-        self.assertIn('subscription_id', response.json)
-        self.assertEqual(response.json['username'], 'SampleFullData')
-        self.assertEqual(response.json['subscription_id'], 2)
-
-        # Verify DB
-        with self.app.app_context():
-            user = User.query.filter_by(username='SampleFullData').first()
-            self.assertIsNotNone(user)  # Ensure the user exists
-            self.assertEqual(user.email, 'sampleemail@sample.com')  # Ensure email matches
-
-
-
-
-
-
-
-if __name__ == '__main__':
-    unittest.main()
