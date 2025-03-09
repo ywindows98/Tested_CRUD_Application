@@ -42,7 +42,7 @@ class BaseUserTestCase(unittest.TestCase):
             'username': 'UserNoLocation',
             'email': 'sampleemail@sample.com',
             'subscription_id': 1,
-            'date_registered': datetime.date(2025, 3, 1),
+            'date_registered': datetime.datetime(2025, 3, 1),
             'status': StatusEnum.ONLINE.name
         }
 
@@ -50,7 +50,7 @@ class BaseUserTestCase(unittest.TestCase):
             'username': 'UserNoStatus',
             'email': 'sampleemail@sample.com',
             'subscription_id': 1,
-            'date_registered': datetime.date(2025, 3, 1),
+            'date_registered': datetime.datetime(2025, 3, 1),
             'location': 'Kosice'
         }
 

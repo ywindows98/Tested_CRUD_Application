@@ -38,7 +38,7 @@ def create_user():
     db.session.add(new_user)
     db.session.commit()
 
-    return jsonify({'message': f'User successfully created', 'username': username, 'subscription_id': subscription_id}), 201
+    return jsonify({'message': f'User successfully created'}), 201
 
 @main_bp.route('/user/<int:id>', methods=['GET'])
 def get_user():
