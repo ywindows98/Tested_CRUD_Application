@@ -15,6 +15,28 @@ def get_users():
 
 @main_bp.route('/user', methods=['POST'])
 def create_user():
+    """
+    Method to handle new user creation.
+
+    Method expects a JSON payload containing user data.
+
+    Expected JSON payload:
+    {
+        'username': 'string', - REQUIRED
+        'email': 'string', - REQUIRED
+        'subscription_id': 'int', - REQUIRED
+        'date_registered': 'string' - datetime.datetime format
+        'location': 'string',
+        'status': 'string'
+    }
+
+    If any of the required values is missing, a 400 Bad Request response will be returned.
+    The new user will be added to the database if the validation is successful.
+
+    :return:
+        JSON response with a message or an error and a status code.
+    """
+
     data = request.get_json()
     if not data:
         return jsonify({'error': 'Invalid request data'}), 400

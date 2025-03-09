@@ -8,13 +8,14 @@ from backend.src.models import User, Subscription, StatusEnum
 
 class TestUserCreate(BaseUserTestCase):
     def _check_response_for_successful_creation(self, sample_data):
-        """Post user from sample_data and test received response"""
+        """Post valid user from sample_data and test if received response is 201 Created"""
         response = self.client.post('/user', json=sample_data)
 
         # HTTP response
         self.assertEqual(response.status_code, 201, 'Response status code for a good request is not a 201 Created')
 
     def _select_user_by_username(self, username):
+        """Select user by given username and check if user with such username exists"""
         # Select user from db
         with self.app.app_context():
             user = User.query.filter_by(username=username).first()
@@ -23,12 +24,13 @@ class TestUserCreate(BaseUserTestCase):
         return user
 
     def _check_required_fields(self, sample_data, user):
+        """Test if required values were correctly written to the database"""
         self.assertEqual(user.username, sample_data['username'], 'Created user has wrong username')
         self.assertEqual(user.email, sample_data['email'], 'Created user has wrong email')
         self.assertEqual(user.subscription_id, sample_data['subscription_id'], 'Created user has wrong subscription_id')
 
     def _check_response_for_unsuccessful_creation(self, sample_data):
-        """Post user from sample_data and test received response"""
+        """Post invalid user from sample_data and test if received response is 400 Bad Request"""
         response = self.client.post('/user', json=sample_data)
 
         # HTTP response
