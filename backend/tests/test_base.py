@@ -83,6 +83,8 @@ class BaseUserTestCase(unittest.TestCase):
         # self.client = self.__class__.client
         self.app_context = self.app.app_context()
         self.app_context.push()
+        db.drop_all()
+        db.create_all()
 
     def tearDown(self):
         """Roll back the changes"""

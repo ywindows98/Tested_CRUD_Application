@@ -24,6 +24,6 @@ EXPOSE 5000
 ## Arguments
 #CMD ["run", "--host", "0.0.0.0"]
 
-ENTRYPOINT ["sh", "-c", "pytest -v --cov && flask run --host=0.0.0.0"]
+ENTRYPOINT ["sh", "-c", "pytest -v --cov --color=yes && flask run --host=0.0.0.0"]
 # To make app run even if tests are failed
 #ENTRYPOINT ["sh", "-c", "pytest -v --cov || true && flask run --host=0.0.0.0"]

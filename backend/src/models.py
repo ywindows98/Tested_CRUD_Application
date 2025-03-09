@@ -20,7 +20,7 @@ class User(db.Model):
     username = db.Column(db.String(30), unique=True, nullable=False)
     email = db.Column(db.String(30), unique=True, nullable=False)
     subscription_id = db.Column(db.Integer, db.ForeignKey('subscriptions.id'), nullable=False)
-    date_registered = db.Column(db.DateTime, default=datetime.date.today(), nullable=False)
+    date_registered = db.Column(db.DateTime, default=datetime.datetime.today(), nullable=False)
     location = db.Column(db.String(60), unique=False, nullable=True)
     status = db.Column(db.Enum(StatusEnum), default=StatusEnum.OFFLINE, nullable=False)
 
