@@ -74,6 +74,31 @@ class BaseUserTestCase(unittest.TestCase):
             'email': 'sampleemail7@sample.com',
         }
 
+        # Samples for update method testing
+        cls.sample_full_data_changed = {
+            'username': 'SampleFullDataChanged',
+            'email': 'sampleemailnew1@sample.com',
+            'subscription_id': 1,
+            'date_registered': datetime.datetime(2024, 3, 1),
+            'location': 'Presov',
+            'status': StatusEnum.OFFLINE.name
+        }
+
+        cls.sample_required_data = {
+            'username': 'SampleRequiredData',
+            'email': 'sampleemail12@sample.com',
+            'subscription_id': 2,
+        }
+
+        cls.sample_added_full_data = {
+            'username': 'SampleRequiredData',
+            'email': 'sampleemail12@sample.com',
+            'subscription_id': 2,
+            'date_registered': datetime.datetime(2025, 2, 12),
+            'location': 'Bratislava',
+            'status': StatusEnum.ONLINE.name
+        }
+
 
     @classmethod
     def tearDownClass(cls):

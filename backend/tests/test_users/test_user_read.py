@@ -40,7 +40,7 @@ class TestUserRead(BaseUserTestCase):
 
         if 'location' in sample_data:
             self.assertEqual(sample_data['location'], user_json['location'],
-                             'Location if the returned user is wrong')
+                             'Location of the returned user is wrong')
 
         if 'status' in sample_data:
             self.assertEqual(sample_data['status'], user_json['status'],

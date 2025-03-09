@@ -101,19 +101,61 @@ def get_user(id):
         JSON dict of user and a response code 200.
     """
     user = User.query.filter_by(id=id).first()
+    if not user:
+        return jsonify({'message': f'No user with id={id} found'}), 404
 
-    if user:
-        user_dict = user.to_dict()
-        user_dict['status'] = user_dict['status'].name
+    user_dict = user.to_dict()
+    user_dict['status'] = user_dict['status'].name
 
-        return jsonify(user_dict), 200
+    return jsonify(user_dict), 200
 
-    return jsonify({'message': f'No user with id={id} found'}), 404
 
 
 @main_bp.route('/user/<int:id>', methods=['PUT'])
 def update_user(id):
-    return jsonify({'message': 'Not implemented'}), 405
+    user = User.query.filter_by(id=id).first()
+    if not user:
+        return jsonify({'message': f'No user with id={id} found'}), 404
+
+    data = request.get_json()
+    if not data:
+        return jsonify({'error': 'Invalid request data'}), 400
+
+    # Retrieve model attributes from json
+    username = data.get('username')
+    email = data.get('email')
+    subscription_id = data.get('subscription_id')
+    date_registered = data.get('date_registered')
+    location = data.get('location')
+    status = data.get('status')
+
+    if username is None:
+        return jsonify({'error': f'No given username in update'}), 400
+
+    if email is None:
+        return jsonify({'error': f'No given email in update'}), 400
+
+    if subscription_id is None:
+        return jsonify({'error': f'No given subscription_id in update'}), 400
+
+     # Case when date is given
+    if date_registered is not None:
+        date_registered = datetime.strptime(date_registered, "%a, %d %b %Y %H:%M:%S GMT").date()
+
+    # Update user
+    user.username = username
+    user.email = email
+    user.subscription_id = subscription_id
+    if 'date_registered' in data:
+        user.date_registered = date_registered
+    user.location = location
+    if 'date_registered' in data:
+        user.status = status
+
+
+    db.session.commit()
+
+    return jsonify({'message': f'User successfully updated'}), 200
 
 @main_bp.route('/user/<int:id>', methods=['DELETE'])
 def delete_user(id):
