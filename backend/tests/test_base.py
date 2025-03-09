@@ -21,6 +21,11 @@ class BaseUserTestCase(unittest.TestCase):
             db.create_all()
 
         # Create sample users
+
+        cls.sample_no_data = {
+
+        }
+
         cls.sample_full_data = {
             'username': 'SampleFullData',
             'email': 'sampleemail@sample.com',
@@ -64,7 +69,7 @@ class BaseUserTestCase(unittest.TestCase):
             'subscription_id': 2
         }
 
-        cls.sample_no_subscription = {
+        cls.sample_no_subscription_id = {
             'username': 'UserNoSubscription',
             'email': 'sampleemail@sample.com',
         }

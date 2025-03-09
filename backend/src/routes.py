@@ -27,6 +27,15 @@ def create_user():
     location = data.get('location')
     status = data.get('status')
 
+    if username is None:
+        return jsonify({'error': f'No given username for creation'}), 400
+
+    if email is None:
+        return jsonify({'error': f'No given email for creation'}), 400
+
+    if subscription_id is None:
+        return jsonify({'error': f'No given subscription_id for creation'}), 400
+
     # Create user
     new_user = User(username=username, email=email, subscription_id=subscription_id, location=location, status=status)
 
@@ -39,6 +48,7 @@ def create_user():
     db.session.commit()
 
     return jsonify({'message': f'User successfully created'}), 201
+
 
 @main_bp.route('/user/<int:id>', methods=['GET'])
 def get_user():
