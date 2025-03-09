@@ -10,7 +10,6 @@ from backend.src.models import User, Subscription, StatusEnum
 
 @pytest.mark.run(order=3)
 class TestUserRead(BaseUserTestCase):
-
     def _check_returned_user(self, sample_data, user_json):
         """
         Check given user_json data to be as expected from stored object.
@@ -49,6 +48,7 @@ class TestUserRead(BaseUserTestCase):
         else:
             self.assertEqual(StatusEnum.OFFLINE.name, user_json['status'],
                              'Status of the returned user is wrong')
+
     def test_read_users(self):
         """Test GET /user to get list of users"""
         self.client.post('/user', json=self.sample_full_data)
@@ -73,4 +73,47 @@ class TestUserRead(BaseUserTestCase):
         response = self.client.get('/user')
 
         self.assertEqual(response.status_code, 404, 'Response status code is not 404 when there are no users')
+
+    def test_read_user(self):
+        """Test GET /user/<int:id> to get a user by an id"""
+        self.client.post('/user', json=self.sample_full_data)
+        self.client.post('/user', json=self.sample_no_date)
+        self.client.post('/user', json=self.sample_no_location)
+        self.client.post('/user', json=self.sample_no_status)
+
+        response = self.client.get('/user/1')
+
+        self.assertEqual(response.status_code, 200, 'Response status code is not 200')
+        self.assertIsInstance(response.json, dict, 'Response is not a dictionary')
+
+        self._check_returned_user(self.sample_full_data, response.json)
+
+        response = self.client.get('/user/2')
+
+        self.assertEqual(response.status_code, 200, 'Response status code is not 200')
+        self.assertIsInstance(response.json, dict, 'Response is not a dictionary')
+
+        self._check_returned_user(self.sample_no_date, response.json)
+
+        response = self.client.get('/user/3')
+
+        self.assertEqual(response.status_code, 200, 'Response status code is not 200')
+        self.assertIsInstance(response.json, dict, 'Response is not a dictionary')
+
+        self._check_returned_user(self.sample_no_location, response.json)
+
+        response = self.client.get('/user/4')
+
+        self.assertEqual(response.status_code, 200, 'Response status code is not 200')
+        self.assertIsInstance(response.json, dict, 'Response is not a dictionary')
+
+        self._check_returned_user(self.sample_no_status, response.json)
+
+
+    def test_read_no_user(self):
+        """Test GET /user to return a 404 uf there is no user with given id"""
+
+        response = self.client.get('/user/12')
+
+        self.assertEqual(response.status_code, 404, 'Response status code is not 404 when there is no user with given id')
 

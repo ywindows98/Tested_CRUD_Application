@@ -11,6 +11,15 @@ def home():
 
 @main_bp.route('/user', methods=['GET'])
 def get_users():
+    """
+    Method to handle user reading.
+
+    Method queries all users from db, serializes them to json and returns.
+    If there are no users in the db, response code is 404.
+
+    :return:
+        JSON list of user dictionaries and a response code 200.
+    """
     users = User.query.all()
     if users:
         user_dicts = [user.to_dict() for user in users]
@@ -82,13 +91,30 @@ def create_user():
 
 
 @main_bp.route('/user/<int:id>', methods=['GET'])
-def get_user():
-    return jsonify({'message': 'Not implemented'}), 405
+def get_user(id):
+    """
+    Method to handle specific user reading.
+    Method queries a user from a database by an id.
+    If there is no user with given id in the database the response is 404.
+
+    :return:
+        JSON dict of user and a response code 200.
+    """
+    user = User.query.filter_by(id=id).first()
+
+    if user:
+        user_dict = user.to_dict()
+        user_dict['status'] = user_dict['status'].name
+
+        return jsonify(user_dict), 200
+
+    return jsonify({'message': f'No user with id={id} found'}), 404
+
 
 @main_bp.route('/user/<int:id>', methods=['PUT'])
-def update_user():
+def update_user(id):
     return jsonify({'message': 'Not implemented'}), 405
 
 @main_bp.route('/user/<int:id>', methods=['DELETE'])
-def delete_user():
+def delete_user(id):
     return jsonify({'message' : 'Not implemented'}), 405
