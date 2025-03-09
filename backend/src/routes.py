@@ -11,7 +11,16 @@ def home():
 
 @main_bp.route('/user', methods=['GET'])
 def get_users():
-    return jsonify({'message': 'Not implemented'}), 405
+    users = User.query.all()
+    if users:
+        user_dicts = [user.to_dict() for user in users]
+
+        for i in range(len(user_dicts)):
+            user_dicts[i]['status'] = user_dicts[i]['status'].name
+
+        return jsonify(user_dicts), 200
+
+    return jsonify({'message': 'No users found'}), 404
 
 @main_bp.route('/user', methods=['POST'])
 def create_user():

@@ -1,4 +1,5 @@
 from datetime import datetime
+import pytest
 
 import sys
 sys.path.append('..')
@@ -6,6 +7,8 @@ sys.path.append('..')
 from backend.tests.test_base import BaseUserTestCase
 from backend.src.models import User, Subscription, StatusEnum
 
+
+@pytest.mark.run(order=2)
 class TestUserCreate(BaseUserTestCase):
     def _check_response_for_successful_creation(self, sample_data):
         """Post valid user from sample_data and test if received response is 201 Created"""

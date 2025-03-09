@@ -1,10 +1,13 @@
 import unittest
+import pytest
 
 import sys
 sys.path.append('..')
 
 from backend.app import app
 
+
+@pytest.mark.run(order=1)
 class TestRoutes(unittest.TestCase):
     def setUp(self):
         app.config['TESTING'] = True # enable testing mode for flask

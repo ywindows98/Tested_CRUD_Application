@@ -27,4 +27,13 @@ class User(db.Model):
     subscription = db.relationship('Subscription', backref='users')
 
     def to_dict(self):
-        return {'id': self.id, 'name': self.name, 'email': self.email}
+        """Convert the object to a dictionary"""
+        return {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email,
+            'subscription_id': self.subscription_id,
+            'date_registered': self.date_registered,
+            'location': self.location,
+            'status': self.status
+        }

@@ -28,7 +28,7 @@ class BaseUserTestCase(unittest.TestCase):
 
         cls.sample_full_data = {
             'username': 'SampleFullData',
-            'email': 'sampleemail@sample.com',
+            'email': 'sampleemail1@sample.com',
             'subscription_id': 2,
             'date_registered': datetime.datetime(2025, 3, 1),
             'location': 'Kosice',
@@ -37,7 +37,7 @@ class BaseUserTestCase(unittest.TestCase):
 
         cls.sample_no_date = {
             'username': 'UserNoDate',
-            'email': 'sampleemail@sample.com',
+            'email': 'sampleemail2@sample.com',
             'subscription_id': 1,
             'location': 'Kosice',
             'status': StatusEnum.ONLINE.name
@@ -45,7 +45,7 @@ class BaseUserTestCase(unittest.TestCase):
 
         cls.sample_no_location = {
             'username': 'UserNoLocation',
-            'email': 'sampleemail@sample.com',
+            'email': 'sampleemail3@sample.com',
             'subscription_id': 1,
             'date_registered': datetime.datetime(2025, 3, 1),
             'status': StatusEnum.ONLINE.name
@@ -53,14 +53,14 @@ class BaseUserTestCase(unittest.TestCase):
 
         cls.sample_no_status = {
             'username': 'UserNoStatus',
-            'email': 'sampleemail@sample.com',
+            'email': 'sampleemail4@sample.com',
             'subscription_id': 1,
             'date_registered': datetime.datetime(2025, 3, 1),
             'location': 'Kosice'
         }
 
         cls.sample_no_username = {
-            'email': 'sampleemail@sample.com',
+            'email': 'sampleemail5@sample.com',
             'subscription_id': 3
         }
 
@@ -71,7 +71,7 @@ class BaseUserTestCase(unittest.TestCase):
 
         cls.sample_no_subscription_id = {
             'username': 'UserNoSubscription',
-            'email': 'sampleemail@sample.com',
+            'email': 'sampleemail7@sample.com',
         }
 
 
