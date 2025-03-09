@@ -49,7 +49,7 @@ class TestUserCreate(BaseUserTestCase):
 
         self._check_required_fields(sample_data, user)
 
-        self.assertIsNotNone(user.date_registered, 'Created user has not date_registered')
+        self.assertIsNotNone(user.date_registered, 'Created user has no default date_registered')
         self.assertEqual(user.location, sample_data['location'], 'Created user has wrong location')
         self.assertEqual(user.status, StatusEnum[sample_data['status']], 'Created user has wrong status')
 
@@ -65,3 +65,16 @@ class TestUserCreate(BaseUserTestCase):
         self.assertEqual(user.date_registered, sample_data['date_registered'], 'Created user has wrong date_registered')
         self.assertIsNone(user.location, 'Created user with no given location has a location')
         self.assertEqual(user.status, StatusEnum[sample_data['status']], 'Created user has wrong status')
+
+    def test_create_user_no_status(self):
+        """Test POST /user for user with no location"""
+        sample_data = self.sample_no_status
+        self._check_response_for_sample(sample_data)
+
+        user = self._select_user_by_username(sample_data['username'])
+
+        self._check_required_fields(sample_data, user)
+
+        self.assertEqual(user.date_registered, sample_data['date_registered'], 'Created user has wrong date_registered')
+        self.assertEqual(user.location, sample_data['location'], 'Created user has wrong location')
+        self.assertEqual(user.status, StatusEnum.OFFLINE, 'Created user has no default status or a wrong status')

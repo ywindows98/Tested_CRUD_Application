@@ -22,7 +22,7 @@ class User(db.Model):
     subscription_id = db.Column(db.Integer, db.ForeignKey('subscriptions.id'), nullable=False)
     date_registered = db.Column(db.DateTime, default=datetime.datetime.today(), nullable=False)
     location = db.Column(db.String(60), unique=False, nullable=True)
-    status = db.Column(db.Enum(StatusEnum), default=StatusEnum.OFFLINE, nullable=False)
+    status = db.Column(db.Enum(StatusEnum), default=StatusEnum.OFFLINE.name, nullable=False)
 
     subscription = db.relationship('Subscription', backref='users')
 
