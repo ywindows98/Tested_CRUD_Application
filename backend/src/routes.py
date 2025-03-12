@@ -179,4 +179,11 @@ def update_user(id):
 
 @main_bp.route('/user/<int:id>', methods=['DELETE'])
 def delete_user(id):
-    return jsonify({'message' : 'Not implemented'}), 405
+    user = User.query.filter_by(id=id).first()
+    if not user:
+        return jsonify({'message': f'No user with id={id} found'}), 404
+
+    db.session.delete(user)
+    db.session.commit()
+
+    return jsonify({'message' : 'User deleted'}), 204

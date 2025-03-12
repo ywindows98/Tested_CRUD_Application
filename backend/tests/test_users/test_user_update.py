@@ -147,3 +147,16 @@ class TestUserUpdate(BaseUserTestCase):
         response = self.client.put('/user/1', json=sample_changed_data)
 
         self.assertEqual(response.status_code, 400, 'Response status code for a bad request is not a 400 Bad Request')
+
+    def test_update_no_user(self):
+        """Test PUT /user/id with no required data"""
+        sample_required_data = self.sample_required_data
+        self.client.post('/user', json=sample_required_data)
+
+        sample_changed_data = self.sample_no_username
+        response = self.client.put('/user/12', json=sample_changed_data)
+
+        self.assertEqual(response.status_code, 404, 'Response status code is not 404 when there is no user with given id')
+
+
+
