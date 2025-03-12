@@ -98,7 +98,7 @@ def get_user(id):
     If there is no user with given id in the database the response is 404.
 
     :return:
-        JSON dict of user and a response code 200.
+        JSON dictionary of user and a response code 200.
     """
     user = User.query.filter_by(id=id).first()
     if not user:
@@ -113,6 +113,27 @@ def get_user(id):
 
 @main_bp.route('/user/<int:id>', methods=['PUT'])
 def update_user(id):
+    """
+    Method to handle user updating.
+    
+    Method expects a JSON payload containing updated user data.
+    
+    Expected JSON payload:
+    {
+    'username': 'string', - REQUIRED
+    'email': 'string', - REQUIRED
+    'subscription_id': 'int', - REQUIRED
+    'date_registered': 'string' - datetime.datetime format
+    'location': 'string',
+    'status': 'string'
+    }
+    
+    If any of the required values is missing, a 400 Bad Request response will be returned.
+    User will be updated in the database if the validation is successful.
+    
+    :return:
+        JSON response with a message or an error and a status code.
+    """
     user = User.query.filter_by(id=id).first()
     if not user:
         return jsonify({'message': f'No user with id={id} found'}), 404
@@ -151,7 +172,6 @@ def update_user(id):
     user.location = location
     if 'date_registered' in data:
         user.status = status
-
 
     db.session.commit()
 

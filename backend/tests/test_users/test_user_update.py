@@ -9,7 +9,7 @@ from backend.src.models import User, Subscription, StatusEnum
 
 
 @pytest.mark.run(order=4)
-class TestUserCreate(BaseUserTestCase):
+class TestUserUpdate(BaseUserTestCase):
     def _check_returned_user(self, sample_data, user_json):
         """
         Check given user_json data to be as expected from stored object.
