@@ -188,6 +188,15 @@ def update_user(id):
 
 @main_bp.route('/user/<int:id>', methods=['DELETE'])
 def delete_user(id):
+    """
+    Method to handle user deletion.
+
+    Method queries a user from a database by an id and deletes it.
+    If there is no user with given id in the database the response is 404.
+
+    :return:
+        JSON response with a message or an error and a status code.
+    """
     user = User.query.filter_by(id=id).first()
     if not user:
         return jsonify({'message': f'No user with id={id} found'}), 404
