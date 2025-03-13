@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 
 function UsersPage() {
   const [users, setUsers] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Assumes the Flask backend exposes the users data at /api/users
@@ -20,7 +22,10 @@ function UsersPage() {
         <ul>
           {users.map((user) => (
             <li key={user.id}>
-              {user.username} - {user.email}
+              {user.username} | {user.email} | {user.status}
+              <button onClick={() => navigate(`/user/${user.id}`)}>
+                View Details
+              </button>
             </li>
           ))}
         </ul>

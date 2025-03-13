@@ -1,6 +1,7 @@
 import React from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import UsersPage from './UsersPage';
+import UserDetails from './UserDetails';
 
 function HomePage() {
   return (
@@ -10,6 +11,7 @@ function HomePage() {
       </nav>
       <Routes>
         <Route path="/user" element={<UsersPage />} />
+        <Route path="/user/:userId" element={<UserDetails />} />
       </Routes>
     </div>
   );
