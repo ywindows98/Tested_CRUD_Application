@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 from .database import db
 import os
 
@@ -9,6 +10,7 @@ def create_app(testing=False):
         app.config['TESTING'] = True
     else:
         app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+        CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
