@@ -14,6 +14,22 @@ function UserDetail() {
       .catch((err) => console.error('Error fetching user detail:', err));
   }, [userId]);
 
+  const handleDelete = () => {
+    // Send a DELETE request to the backend for the given userId
+    fetch(`http://127.0.0.1:5000/user/${userId}`, {
+      method: 'DELETE'
+    })
+      .then((res) => {
+        if (res.ok) {
+          // On success, navigate back to the users list page
+          navigate('/user');
+        } else {
+          console.error('Failed to delete user');
+        }
+      })
+      .catch((err) => console.error('Error deleting user:', err));
+  };
+
   if (!userDetail) {
     return <p>Loading user details...</p>;
   }
@@ -30,6 +46,15 @@ function UserDetail() {
       <p><strong>Status:</strong> {userDetail.status}</p>
       <button onClick={() => navigate('/user')} style={{ marginTop: '20px' }}>
         Back to Users List
+      </button>
+      <button onClick={() => navigate(`/user/${userId}/edit`)} style={{ marginTop: '20px' }}>
+        Edit User
+      </button>
+      <button
+        onClick={handleDelete}
+        style={{ marginTop: '20px' }}
+        >
+        Delete User
       </button>
     </div>
   );

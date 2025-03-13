@@ -65,6 +65,20 @@ class TestUserCreate(BaseUserTestCase):
         self.assertEqual(user.location, sample_data['location'], 'Created user has wrong location')
         self.assertEqual(user.status, StatusEnum[sample_data['status']], 'Created user has wrong status')
 
+    def test_create_user_blank_date(self):
+        """Test POST /user for user with blank registration date"""
+        sample_data = self.sample_no_date.copy()
+        sample_data['date_registered'] = ''
+        self._check_response_for_successful_creation(sample_data)
+
+        user = self._select_user_by_username(sample_data['username'])
+
+        self._check_required_fields(sample_data, user)
+
+        self.assertIsNotNone(user.date_registered, 'Created user has no default date_registered')
+        self.assertEqual(user.location, sample_data['location'], 'Created user has wrong location')
+        self.assertEqual(user.status, StatusEnum[sample_data['status']], 'Created user has wrong status')
+
     def test_create_user_no_location(self):
         """Test POST /user for user with no location"""
         sample_data = self.sample_no_location
@@ -78,9 +92,38 @@ class TestUserCreate(BaseUserTestCase):
         self.assertIsNone(user.location, 'Created user with no given location has a location')
         self.assertEqual(user.status, StatusEnum[sample_data['status']], 'Created user has wrong status')
 
+    def test_create_user_blank_location(self):
+        """Test POST /user for user with blank location"""
+        sample_data = self.sample_no_location.copy()
+        sample_data['location'] = ''
+        self._check_response_for_successful_creation(sample_data)
+
+        user = self._select_user_by_username(sample_data['username'])
+
+        self._check_required_fields(sample_data, user)
+
+        self.assertEqual(user.date_registered, sample_data['date_registered'], 'Created user has wrong date_registered')
+        self.assertIsNone(user.location, 'Created user with no given location has a location')
+        self.assertEqual(user.status, StatusEnum[sample_data['status']], 'Created user has wrong status')
+
     def test_create_user_no_status(self):
-        """Test POST /user for user with no status """
+        """Test POST /user for user with no status"""
         sample_data = self.sample_no_status
+        self._check_response_for_successful_creation(sample_data)
+
+        user = self._select_user_by_username(sample_data['username'])
+
+        self._check_required_fields(sample_data, user)
+
+        self.assertEqual(user.date_registered, sample_data['date_registered'], 'Created user has wrong date_registered')
+        self.assertEqual(user.location, sample_data['location'], 'Created user has wrong location')
+        self.assertEqual(user.status, StatusEnum.OFFLINE, 'Created user has no default status or a wrong status')
+
+    def test_create_user_blank_status(self):
+        """Test POST /user for user with blank status"""
+        sample_data = self.sample_no_status.copy()
+        sample_data['status'] = ''
+
         self._check_response_for_successful_creation(sample_data)
 
         user = self._select_user_by_username(sample_data['username'])

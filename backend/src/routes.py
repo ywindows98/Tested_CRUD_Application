@@ -67,6 +67,15 @@ def create_user():
     location = data.get('location')
     status = data.get('status')
 
+    if date_registered == '':
+        date_registered = None
+
+    if location == '':
+        location = None
+
+    if status == '':
+        status = None
+
     if username is None:
         return jsonify({'error': f'No given username for creation'}), 400
 

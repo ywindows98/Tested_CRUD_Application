@@ -19,16 +19,22 @@ function UsersPage() {
       {users.length === 0 ? (
         <p>No users found.</p>
       ) : (
-        <ul>
-          {users.map((user) => (
-            <li key={user.id}>
-              {user.username} | {user.email} | {user.status}
-              <button onClick={() => navigate(`/user/${user.id}`)}>
-                View Details
-              </button>
-            </li>
-          ))}
-        </ul>
+          <>
+            <button onClick={() => navigate(`/user/create`)}>
+                Create User
+            </button>
+            <ul>
+              {users.map((user) => (
+                <li key={user.id}>
+                  {user.username} | {user.email} | {user.status}
+                  <button onClick={() => navigate(`/user/${user.id}`)}>
+                    View Details
+                  </button>
+
+                </li>
+              ))}
+            </ul>
+          </>
       )}
     </div>
   );
