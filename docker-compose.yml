@@ -22,7 +22,7 @@ services:
     depends_on:
       - db
     restart:
-      "on-failure:1"
+      always
     volumes:
       - ./backend:/app
     networks:

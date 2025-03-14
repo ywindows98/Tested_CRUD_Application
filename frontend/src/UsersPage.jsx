@@ -7,6 +7,7 @@ function UsersPage() {
 
   useEffect(() => {
     // Assumes the Flask backend exposes the users data at /api/users
+//     fetch('http://backend:5000/user')
     fetch('http://127.0.0.1:5000/user')
       .then((res) => res.json())
       .then((data) => setUsers(data))
