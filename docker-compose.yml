@@ -9,6 +9,8 @@ services:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432" # first port is the outside port
+    restart:
+      always
     networks:
       - common_network
 

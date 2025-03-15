@@ -7,7 +7,6 @@ function UserDetail() {
   const [userDetail, setUserDetail] = useState(null);
 
   useEffect(() => {
-    // Assumes the Flask backend exposes individual user data at /user/<userId>
     fetch(`http://127.0.0.1:5000/user/${userId}`)
       .then((res) => res.json())
       .then((data) => setUserDetail(data))
@@ -15,13 +14,11 @@ function UserDetail() {
   }, [userId]);
 
   const handleDelete = () => {
-    // Send a DELETE request to the backend for the given userId
     fetch(`http://127.0.0.1:5000/user/${userId}`, {
       method: 'DELETE'
     })
       .then((res) => {
         if (res.ok) {
-          // On success, navigate back to the users list page
           navigate('/user');
         } else {
           console.error('Failed to delete user');
@@ -40,9 +37,9 @@ function UserDetail() {
       <p><strong>ID:</strong> {userDetail.id}</p>
       <p><strong>Username:</strong> {userDetail.username}</p>
       <p><strong>Email:</strong> {userDetail.email}</p>
-      <p><strong>Status:</strong> {userDetail.subscription_id}</p>
-      <p><strong>Status:</strong> {userDetail.location}</p>
-      <p><strong>Status:</strong> {userDetail.date_registered}</p>
+      <p><strong>Subscription ID:</strong> {userDetail.subscription_id}</p>
+      <p><strong>Location:</strong> {userDetail.location}</p>
+      <p><strong>Registration Date:</strong> {userDetail.date_registered}</p>
       <p><strong>Status:</strong> {userDetail.status}</p>
       <button onClick={() => navigate('/user')} style={{ marginTop: '20px' }}>
         Back to Users List

@@ -1,9 +1,9 @@
 # CRUD_Application
 
-Services:
+Components:
 	db - postgres
 	backend - flask
 	frontend - react
 
-To connect:
+To display in web:
 	http://localhost:3000

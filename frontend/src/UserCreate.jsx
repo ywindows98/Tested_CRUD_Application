@@ -20,7 +20,6 @@ function UserEdit() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Send a PUT request to update the user's data
     fetch(`http://127.0.0.1:5000/user`, {
       method: 'POST',
       headers: {

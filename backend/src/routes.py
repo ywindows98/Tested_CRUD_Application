@@ -21,15 +21,15 @@ def get_users():
         JSON list of user dictionaries and a response code 200.
     """
     users = User.query.all()
+    user_dicts = [user.to_dict() for user in users]
     if users:
-        user_dicts = [user.to_dict() for user in users]
 
         for i in range(len(user_dicts)):
             user_dicts[i]['status'] = user_dicts[i]['status'].name
 
         return jsonify(user_dicts), 200
 
-    return jsonify({'message': 'No users found'}), 404
+    return jsonify(user_dicts), 404
 
 @main_bp.route('/user', methods=['POST'])
 def create_user():

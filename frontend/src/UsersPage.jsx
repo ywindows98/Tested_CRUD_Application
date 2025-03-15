@@ -6,24 +6,24 @@ function UsersPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Assumes the Flask backend exposes the users data at /api/users
-//     fetch('http://backend:5000/user')
     fetch('http://127.0.0.1:5000/user')
       .then((res) => res.json())
       .then((data) => setUsers(data))
       .catch((err) => console.error('Error fetching users:', err));
   }, []);
 
+  console.log(users)
+
   return (
     <div style={{ padding: '20px' }}>
       <h1>Users List</h1>
+      <button onClick={() => navigate(`/user/create`)}>
+        Create User
+      </button>
       {users.length === 0 ? (
         <p>No users found.</p>
       ) : (
           <>
-            <button onClick={() => navigate(`/user/create`)}>
-                Create User
-            </button>
             <ul>
               {users.map((user) => (
                 <li key={user.id}>
