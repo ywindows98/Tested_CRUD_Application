@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { BACKEND_URL } from './config';
 
 function UserEdit() {
   const { userId } = useParams();
@@ -20,7 +21,7 @@ function UserEdit() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch(`http://127.0.0.1:5000/user`, {
+    fetch(`${BACKEND_URL}/user`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

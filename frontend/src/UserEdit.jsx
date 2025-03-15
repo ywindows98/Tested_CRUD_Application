@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { BACKEND_URL } from './config';
 
 function UserEdit() {
   const { userId } = useParams();
@@ -15,7 +16,7 @@ function UserEdit() {
 
   useEffect(() => {
     // Fetch the current data for the user
-    fetch(`http://127.0.0.1:5000/user/${userId}`)
+    fetch(`${BACKEND_URL}/user/${userId}`)
       .then((res) => res.json())
       .then((data) =>
         setUserData({
@@ -37,7 +38,7 @@ function UserEdit() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch(`http://127.0.0.1:5000/user/${userId}`, {
+    fetch(`${BACKEND_URL}/user/${userId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'

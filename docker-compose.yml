@@ -7,8 +7,6 @@ services:
       db_env.env
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432" # first port is the outside port
     restart:
       always
     networks:
@@ -20,7 +18,7 @@ services:
     env_file:
       - backend_env.env
     ports:
-      - "5000:5000"
+      - "5000:5000" # first port is the outside port
     depends_on:
       - db
     restart:

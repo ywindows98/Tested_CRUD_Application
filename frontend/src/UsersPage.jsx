@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { BACKEND_URL } from './config';
 
 function UsersPage() {
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/user')
+    fetch(`${BACKEND_URL}/user`)
       .then((res) => res.json())
       .then((data) => setUsers(data))
       .catch((err) => console.error('Error fetching users:', err));

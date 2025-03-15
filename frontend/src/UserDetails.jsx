@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { BACKEND_URL } from './config';
 
 function UserDetail() {
   const { userId } = useParams();
@@ -7,14 +8,14 @@ function UserDetail() {
   const [userDetail, setUserDetail] = useState(null);
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:5000/user/${userId}`)
+    fetch(`${BACKEND_URL}/user/${userId}`)
       .then((res) => res.json())
       .then((data) => setUserDetail(data))
       .catch((err) => console.error('Error fetching user detail:', err));
   }, [userId]);
 
   const handleDelete = () => {
-    fetch(`http://127.0.0.1:5000/user/${userId}`, {
+    fetch(`${BACKEND_URL}/user/${userId}`, {
       method: 'DELETE'
     })
       .then((res) => {
