@@ -27,6 +27,20 @@ This project is a testament to my commitment to continuous learning, leveraging 
 - **Containerization:** Docker and Docker Compose are used to streamline development, testing, and deployment.
 - **Testing:** Integrated unittests for the backend to ensure quality and .
 - **Automation Scripts:** Bash scripts (`start-app.sh` and `end-app.sh`) simplify starting and stopping the entire application.
-- 
+
 ---
+
+### How to Use
+
+1. **Clone the Repository:**
+2. **Start the Application:**
+Use the provided bash script to build and run the Docker containers: ```./start-app.sh```. Tests for the backend are run automatically before backend launch.
+
+
+4. **Accessing the App:**
+Once started, the backend will be available on its configured port 5000 on localhost, and the frontend on port 3000 on localhost.
+
+5. **Stopping and Cleaning Up:**
+When you're ready to stop the application and clear the Docker environment, use the provided bash script: ```./end-app.sh```. This script stops all running containers and removes them along with any associated networks and volumes.
+
 
