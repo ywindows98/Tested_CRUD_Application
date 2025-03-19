@@ -25,7 +25,7 @@ This project is a testament to my commitment to continuous learning, improving m
 - **Frontend:** Developed in React with JavaScript.
 - **Database:** Utilizes PostgreSQL for data storage.
 - **Containerization:** Docker and Docker Compose.
-- **Testing:** Integrated unittests for the backend to ensure quality and .
+- **Testing:** Integrated unittests for the backend to ensure quality.
 - **Automation Scripts:** Bash scripts (`start-app.sh` and `end-app.sh`) simplify starting and stopping the entire application.
 
 ---
