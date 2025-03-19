@@ -14,7 +14,7 @@ The primary goal of this project was to explore and master a variety of new tech
 - **Embrace Test-Driven Development (TDD):**  
   Implement automated tests using unittest and pytest to ensure high code quality, reliability, and to adopt TDD practices as a core part of the development process.
 
-This project is a testament to my commitment to continuous learning, leveraging cutting-edge technologies, and establishing solid QA practices.
+This project is a testament to my commitment to continuous learning, improving my skills in using modern technologies, software development and testing methods.
 
 ---
 
