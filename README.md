@@ -9,7 +9,7 @@ A tested full-stack web application that uses modern technologies and best pract
 The primary goal of this project was to explore and master a variety of new technologies and methodologies. Through this project, I aimed to:
 
 - **Expand Technical Expertise:**  
-  Experiment with and integrate technologies such as Python (Flask, SQLAlchemy, unittest, pytest), React, PostgreSQL, Docker. I also aimed to build a solid project architecture and apply best-practice solutions and design patterns throughout the code.
+  Experiment with and integrate technologies such as Python (Flask, SQLAlchemy, unittest, pytest), React, PostgreSQL, Docker. I also aimed to build a solid project architecture, use design patterns throughout the code and apply best-practice recommendations for software development and testing.
   
 - **Embrace Test-Driven Development (TDD):**  
   Implement automated tests using unittest and pytest to ensure high code quality, reliability, and to adopt TDD practices as a core part of the development process.
