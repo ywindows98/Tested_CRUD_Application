@@ -1,9 +1,32 @@
-# CRUD_Application
+# Tested Full-Stack Dockerized Web Application
 
-Components:
-	db - postgres
-	backend - flask
-	frontend - react
+A tested full-stack web application that uses modern technologies and best practices. This project integrates a Python-based backend using Flask and SQLAlchemy, a simple but dynamic React frontend for a demonstration, and a PostgreSQL database—all containerized using Docker. Tests have been implemented for the backend to ensure reliability using unittest and pytest.
 
-To display in web:
-	http://localhost:3000
+---
+
+## Project Purpose 
+
+The primary goal of this project was to explore and master a variety of new technologies and methodologies. Through this project, I aimed to:
+
+- **Expand Technical Expertise:**  
+  Experiment with and integrate technologies such as Python (Flask, SQLAlchemy, unittest, pytest), React, PostgreSQL, Docker. I also aimed to build a solid project architecture and apply best-practice solutions and design patterns throughout the code.
+  
+- **Embrace Test-Driven Development (TDD):**  
+  Implement automated tests using unittest and pytest to ensure high code quality, reliability, and to adopt TDD practices as a core part of the development process.
+
+This project is a testament to my commitment to continuous learning, leveraging cutting-edge technologies, and establishing solid QA practices.
+
+---
+
+## Features
+
+- **Modular Architecture:** Clear separation between backend, frontend, and database.
+- **Backend:** Built with Python, Flask, and SQLAlchemy.
+- **Frontend:** Developed in React with JavaScript.
+- **Database:** Utilizes PostgreSQL for data storage.
+- **Containerization:** Docker and Docker Compose are used to streamline development, testing, and deployment.
+- **Testing:** Integrated unittests for the backend to ensure quality and .
+- **Automation Scripts:** Bash scripts (`start-app.sh` and `end-app.sh`) simplify starting and stopping the entire application.
+- 
+---
+
